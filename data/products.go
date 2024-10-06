@@ -41,7 +41,7 @@ func (p *Products) ToJSON(w io.Writer) error {
 
 func (p *Product) Validate() error {
 	validate := validator.New()
-	validate.RegisterValidation("sku",validateSKU)
+	validate.RegisterValidation("sku", validateSKU)
 	return validate.Struct(p)
 }
 
@@ -115,5 +115,10 @@ var productList = []*Product{
 }
 
 func DeleteProduct(id int) error {
+	_, pos, err := findProduct(id)
+	if err != nil {
+		return err
+	}
+	productList = append(productList[0:pos], productList[pos+1:]...)
 	return nil
 }

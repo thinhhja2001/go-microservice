@@ -49,7 +49,7 @@ paths:
             description: Returns a list of products
             operationId: deleteProduct
             parameters:
-                - description: The ID of the product to delete from the database
+                - description: ID of the product
                   format: int64
                   in: path
                   name: id
@@ -58,6 +58,22 @@ paths:
                   x-go-name: ID
             responses:
                 "201":
+                    $ref: '#/responses/noContent'
+            tags:
+                - products
+        put:
+            description: Returns a list of products
+            operationId: updateProduct
+            parameters:
+                - description: ID of the product
+                  format: int64
+                  in: path
+                  name: id
+                  required: true
+                  type: integer
+                  x-go-name: ID
+            responses:
+                "200":
                     $ref: '#/responses/noContent'
             tags:
                 - products

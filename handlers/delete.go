@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"demo/data"
+	"errors"
 	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
@@ -18,11 +19,9 @@ func (p Products) DeleteProduct(writer http.ResponseWriter, request *http.Reques
 	vars := mux.Vars(request)
 	id, _ := strconv.Atoi(vars["id"])
 
-	p.l.Println("")
-
 	err := data.DeleteProduct(id)
 
-	if err == data.ErrProductNotFound {
+	if errors.Is(err, data.ErrProductNotFound) {
 		http.Error(writer, "Product Not Found", http.StatusNotFound)
 		return
 	}
