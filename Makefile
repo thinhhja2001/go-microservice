@@ -3,3 +3,6 @@ check_install:
 
 swagger: check_install
 	GO111MODULE= swagger generate spec -o ./swagger.yaml --scan-models
+
+swagger-client: swagger
+	cd sdk; swagger generate client -f ../swagger.yaml -A product-api
