@@ -2,14 +2,19 @@ package main
 
 import (
 	"context"
-	"demo/handlers"
-	"github.com/go-openapi/runtime/middleware"
+	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"time"
 
+	protos "github.com/thinhhja2001/currency/protos"
+	"google.golang.org/grpc"
+
+	"example.com/hello/handlers"
+
+	"github.com/go-openapi/runtime/middleware"
 	gohandlers "github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
@@ -17,14 +22,20 @@ import (
 func main() {
 	l := log.New(os.Stdout, "product-api", log.LstdFlags)
 
-	ph := handlers.NewProducts(l)
+	// create client
+	conn, err := grpc.NewClient("localhost:9092", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		//panic(err)
+	}
+	defer conn.Close()
 
+	cc := protos.NewCurrencyClient(conn)
+
+	ph := handlers.NewProducts(l, cc)
 	sm := mux.NewRouter()
-
 	getRouter := sm.Methods(http.MethodGet).Subrouter()
 	getRouter.HandleFunc("/products", ph.GetProducts)
 	getRouter.HandleFunc("/products/{id:[0-9]+}", ph.GetSingleProduct)
-
 	putRouter := sm.Methods(http.MethodPut).Subrouter()
 	putRouter.HandleFunc("/products/{id:[0-9]+}", ph.UpdateProduct)
 	putRouter.Use(ph.ProductMiddlewareValidation)

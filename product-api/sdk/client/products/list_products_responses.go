@@ -12,8 +12,6 @@ import (
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-
-	"demo/sdk/models"
 )
 
 // ListProductsReader is a Reader for the ListProducts structure.
@@ -46,7 +44,7 @@ ListProductsOK describes a response with status code 200, with default header va
 A list of products returns in the response
 */
 type ListProductsOK struct {
-	Payload []*models.Product
+	Payload []interface{}
 }
 
 // IsSuccess returns true when this list products o k response has a 2xx status code
@@ -89,7 +87,7 @@ func (o *ListProductsOK) String() string {
 	return fmt.Sprintf("[GET /products][%d] listProductsOK %s", 200, payload)
 }
 
-func (o *ListProductsOK) GetPayload() []*models.Product {
+func (o *ListProductsOK) GetPayload() []interface{} {
 	return o.Payload
 }
 

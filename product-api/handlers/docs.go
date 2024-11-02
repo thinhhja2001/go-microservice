@@ -16,7 +16,7 @@
 // swagger:meta
 package handlers
 
-import "demo/data"
+import "example.com/hello/data"
 
 // A list of products returns in the response
 // swagger:response productsResponse

@@ -1,10 +1,11 @@
 package main
 
 import (
-	"demo/sdk/client"
-	"demo/sdk/client/products"
 	"fmt"
 	"testing"
+
+	"example.com/hello/sdk/client"
+	"example.com/hello/sdk/client/products"
 )
 
 func TestOurClient(t *testing.T) {

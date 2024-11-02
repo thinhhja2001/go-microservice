@@ -6,14 +6,10 @@ package products
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-
-	"demo/sdk/models"
 )
 
 // GetSingleProductReader is a Reader for the GetSingleProduct structure.
@@ -46,7 +42,6 @@ GetSingleProductOK describes a response with status code 200, with default heade
 GetSingleProductOK get single product o k
 */
 type GetSingleProductOK struct {
-	Payload *models.Product
 }
 
 // IsSuccess returns true when this get single product o k response has a 2xx status code
@@ -80,27 +75,14 @@ func (o *GetSingleProductOK) Code() int {
 }
 
 func (o *GetSingleProductOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /products/{id}][%d] getSingleProductOK %s", 200, payload)
+	return fmt.Sprintf("[GET /products/{id}][%d] getSingleProductOK", 200)
 }
 
 func (o *GetSingleProductOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /products/{id}][%d] getSingleProductOK %s", 200, payload)
-}
-
-func (o *GetSingleProductOK) GetPayload() *models.Product {
-	return o.Payload
+	return fmt.Sprintf("[GET /products/{id}][%d] getSingleProductOK", 200)
 }
 
 func (o *GetSingleProductOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	o.Payload = new(models.Product)
-
-	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

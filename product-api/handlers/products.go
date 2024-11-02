@@ -2,20 +2,23 @@ package handlers
 
 import (
 	"context"
-	"demo/data"
 	"fmt"
 	"log"
 	"net/http"
+
+	"example.com/hello/data"
+	protos "github.com/thinhhja2001/currency/protos"
 )
 
 // Products is a http.Handler
 type Products struct {
-	l *log.Logger
+	l  *log.Logger
+	cc protos.CurrencyClient
 }
 
 // NewProducts creates a products handler with the given logger
-func NewProducts(l *log.Logger) *Products {
-	return &Products{l}
+func NewProducts(l *log.Logger, cc protos.CurrencyClient) *Products {
+	return &Products{l, cc}
 }
 
 type KeyProduct struct{}

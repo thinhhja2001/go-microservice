@@ -1,8 +1,9 @@
 package handlers
 
 import (
-	"demo/data"
 	"net/http"
+
+	"example.com/hello/data"
 )
 
 // swagger:route POST /products products createProduct

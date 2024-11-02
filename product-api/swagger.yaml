@@ -3,35 +3,8 @@ consumes:
     - application/json
 definitions:
     Product:
-        description: Product Product Product defines the structure for an API product
-        properties:
-            description:
-                description: description
-                type: string
-                x-go-name: Description
-            id:
-                description: the id for this user
-                format: int64
-                minimum: 1
-                type: integer
-                x-go-name: ID
-            name:
-                description: name
-                type: string
-                x-go-name: Name
-            price:
-                description: price
-                format: float
-                type: number
-                x-go-name: Price
-            sku:
-                description: s k u
-                type: string
-                x-go-name: SKU
-        required:
-            - id
-        type: object
-        x-go-package: demo/sdk/models
+        description: Product Product Product Product Product defines the structure for an API product
+        x-go-package: example.com/hello/sdk/models
 info:
     description: Documentation for Product API
     title: classification of Product API
@@ -108,15 +81,12 @@ produces:
 responses:
     createProductResponse:
         description: ""
-        schema:
-            $ref: '#/definitions/Product'
     noContent:
         description: ""
     productsResponse:
         description: A list of products returns in the response
         schema:
-            items:
-                $ref: '#/definitions/Product'
+            items: {}
             type: array
 schemes:
     - http

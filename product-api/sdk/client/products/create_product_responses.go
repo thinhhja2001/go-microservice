@@ -6,14 +6,10 @@ package products
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
-	"encoding/json"
 	"fmt"
-	"io"
 
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
-
-	"demo/sdk/models"
 )
 
 // CreateProductReader is a Reader for the CreateProduct structure.
@@ -46,7 +42,6 @@ CreateProductOK describes a response with status code 200, with default header v
 CreateProductOK create product o k
 */
 type CreateProductOK struct {
-	Payload *models.Product
 }
 
 // IsSuccess returns true when this create product o k response has a 2xx status code
@@ -80,27 +75,14 @@ func (o *CreateProductOK) Code() int {
 }
 
 func (o *CreateProductOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /products][%d] createProductOK %s", 200, payload)
+	return fmt.Sprintf("[POST /products][%d] createProductOK", 200)
 }
 
 func (o *CreateProductOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /products][%d] createProductOK %s", 200, payload)
-}
-
-func (o *CreateProductOK) GetPayload() *models.Product {
-	return o.Payload
+	return fmt.Sprintf("[POST /products][%d] createProductOK", 200)
 }
 
 func (o *CreateProductOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	o.Payload = new(models.Product)
-
-	// response payload
-	if err := consumer.Consume(response.Body(), o.Payload); err != nil && err != io.EOF {
-		return err
-	}
 
 	return nil
 }

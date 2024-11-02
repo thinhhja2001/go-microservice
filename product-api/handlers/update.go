@@ -1,11 +1,12 @@
 package handlers
 
 import (
-	"demo/data"
 	"errors"
-	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
+
+	"example.com/hello/data"
+	"github.com/gorilla/mux"
 )
 
 // swagger:route PUT /products/{id} products updateProduct
